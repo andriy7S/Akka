@@ -14,6 +14,6 @@ public class PrimeCalculator {
 	
 	public static void main(String[] args) {
 		PrimeCalculator primeCalculator = new PrimeCalculator();
-		primeCalculator.calculate(1, 100);
+		primeCalculator.calculate(1, 10000);
 	}
 }

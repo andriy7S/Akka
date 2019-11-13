@@ -40,11 +40,23 @@ public class PrimeMaster extends UntypedActor {
 				int startNumber = start + (i * segmentLength);
 				int endNumber = startNumber + segmentLength - 1;
 				if (i == numberOfWorkers - 1) {
-                   endNumber = end;
+					endNumber = end;
 				}
-				int send[] = {startNumber, endNumber};
+				int send[] = { startNumber, endNumber };
 				workerRouter.route(send, getSelf());
 			}
+		} else if (message instanceof ArrayList) {
+			ArrayList<Integer> result = (ArrayList<Integer>) message;
+			for(int n : result) {
+				System.out.println(n + ", ");
+			}
+			System.out.println();
+			if(++numberOfResults >= numberOfWorkers) {
+				getContext().stop(getSelf());
+				getContext().system().shutdown();
+			}
+		} else {
+			unhandled(message);
 		}
 	}
 
